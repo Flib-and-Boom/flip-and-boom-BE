@@ -4,7 +4,7 @@
   "description": "Backend repository",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon bin/www",
+    "start": "node bin/www",
     "test": "jest --runInBand --forceExit --detectOpenHandles",
     "test2":"jest --runInBand --forceExit --detectOpenHandles --coverage --verbose",
     "create": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
