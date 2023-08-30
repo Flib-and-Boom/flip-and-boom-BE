@@ -195,8 +195,8 @@ class ControllerUser {
       const data = await User.findByPk(id);
 
       data.experience = data.experience + experience;
-      if (difficulty === 'impossible' && data.impossibleScore === 0) {
-        await News.create({ title: 'New Impossible Record Broken', text: `${data.username} has unlocked an impossible record`, author: 'System' })
+      if (difficulty === 'impossible' && data.impossibleScore == 0) {
+        await News.create({ title: 'A new record has been achieved', text: `${data.username} has unlocked an impossible record`, author: 'System' })
       }
       if (data[`${difficulty}Score`] < score) {
         data[`${difficulty}Score`] = score;
