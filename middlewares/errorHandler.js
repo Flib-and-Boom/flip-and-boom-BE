@@ -26,6 +26,7 @@ const errorHandler = (err, req, res, next) => {
             break;
         case "Login First":
         case 'invalid token':
+        case 'Invalid session':
             message = err.name;
             statusCode = 401
                 break;

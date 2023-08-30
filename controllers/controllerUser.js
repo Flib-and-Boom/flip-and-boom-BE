@@ -5,6 +5,7 @@ const {
   TransactionHistory,
   Inventory,
   Item,
+  News
 } = require("../models");
 
 const { comparePassword, signToken } = require("../helpers");
@@ -194,16 +195,18 @@ class ControllerUser {
       const data = await User.findByPk(id);
 
       data.experience = data.experience + experience;
+      if (difficulty === 'impossible' && data.impossibleScore === 0) {
+        await News.create({ title: 'New Impossible Record Broken', text: `${data.username} has unlocked an impossible record`, author: 'System' })
+      }
       if (data[`${difficulty}Score`] < score) {
         data[`${difficulty}Score`] = score;
 
         await data.save();
         res.status(200).json({ message: "Success update" });
       } else {
-        res.status(304).end();
+        await data.save();
+        res.status(200).json("Score Updated");
       }
-      await data.save();
-      res.status(200).json("Score Updated");
     } catch (error) {
       next(error);
     }
