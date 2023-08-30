@@ -16,6 +16,7 @@ const Authentication = async (req, res, next) => {
       },
     });
     //simpan ke req.user
+    if(!result) throw {name: 'Invalid session'}
     req.user = {
       id: result.id,
       username: payload.username,
