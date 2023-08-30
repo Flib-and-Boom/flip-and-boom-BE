@@ -8,6 +8,7 @@ const {
 } = require("../models");
 
 const { comparePassword, signToken } = require("../helpers");
+const { Op } = require("sequelize");
 
 class ControllerUser {
   static async register(req, res, next) {
@@ -267,12 +268,18 @@ class ControllerUser {
         order: [[choice, "desc"]],
         limit: 5,
         attributes: ["username", choice, "createdAt"],
+        where: {
+          [`${difficulty}Score`]: {
+            [Op.gt]: 0,
+          },
+        },
       };
-
+      console.log(option, "<<<<<<<<<<<<<");
       const leaderboard = await User.findAll(option);
 
       res.status(200).json(leaderboard);
     } catch (error) {
+      console.log(error, "<<<<<<<<<<<<<");
       next(error);
     }
   }
