@@ -1,4 +1,4 @@
-const { ControllerUser } = require("./ControllerUser");
+const { ControllerUser } = require("./controllerUser");
 const { ControllerNews } = require("./ControllerNews");
 const { ControllerItem } = require("./controllerItem");
 
